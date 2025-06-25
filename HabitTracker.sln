@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers", "Controllers\Controllers.csproj", "{12EC0B77-CA90-482B-8AFC-F71F0B850CA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controllers", "Controllers\Controllers.csproj", "{12EC0B77-CA90-482B-8AFC-F71F0B850CA3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Controllers", "1 - Controllers", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Models", "4 - Models", "{FB146465-4720-4015-B539-66FB38ACF735}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{90064DAA-CE1C-4132-AC56-BDF85A2B1D0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{90064DAA-CE1C-4132-AC56-BDF85A2B1D0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dtos", "Dtos\Dtos.csproj", "{322B8E2F-F8E8-420E-9D1F-5F2DE39E5E7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dtos", "Dtos\Dtos.csproj", "{322B8E2F-F8E8-420E-9D1F-5F2DE39E5E7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{DB8113FF-1BA8-4FA9-923A-FC542876A739}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{DB8113FF-1BA8-4FA9-923A-FC542876A739}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Dtos", "5 - Dtos", "{A690BBDB-0F1A-4E6A-9ABA-98D5EB6F6311}"
 EndProject
@@ -21,7 +21,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Services", "2 - Service
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Repositories", "3 - Repositories", "{EC8CCE86-F3DC-44AC-8732-13BED1A3A74B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{59B8E04C-FCB9-4C5C-BD60-9E532C760DED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{59B8E04C-FCB9-4C5C-BD60-9E532C760DED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6 - Configuration", "6 - Configuration", "{296D05C6-EA4B-4446-8BC8-D99EFC603A0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "Configuration\Configuration.csproj", "{2C9224A3-5747-48F7-9FB2-AD11F89F724A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +97,18 @@ Global
 		{59B8E04C-FCB9-4C5C-BD60-9E532C760DED}.Release|x64.Build.0 = Release|Any CPU
 		{59B8E04C-FCB9-4C5C-BD60-9E532C760DED}.Release|x86.ActiveCfg = Release|Any CPU
 		{59B8E04C-FCB9-4C5C-BD60-9E532C760DED}.Release|x86.Build.0 = Release|Any CPU
+		{2C9224A3-5747-48F7-9FB2-AD11F89F724A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C9224A3-5747-48F7-9FB2-AD11F89F724A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C9224A3-5747-48F7-9FB2-AD11F89F724A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2C9224A3-5747-48F7-9FB2-AD11F89F724A}.Debug|x64.Build.0 = Debug|Any CPU
+		{2C9224A3-5747-48F7-9FB2-AD11F89F724A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2C9224A3-5747-48F7-9FB2-AD11F89F724A}.Debug|x86.Build.0 = Debug|Any CPU
+		{2C9224A3-5747-48F7-9FB2-AD11F89F724A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C9224A3-5747-48F7-9FB2-AD11F89F724A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C9224A3-5747-48F7-9FB2-AD11F89F724A}.Release|x64.ActiveCfg = Release|Any CPU
+		{2C9224A3-5747-48F7-9FB2-AD11F89F724A}.Release|x64.Build.0 = Release|Any CPU
+		{2C9224A3-5747-48F7-9FB2-AD11F89F724A}.Release|x86.ActiveCfg = Release|Any CPU
+		{2C9224A3-5747-48F7-9FB2-AD11F89F724A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +119,7 @@ Global
 		{322B8E2F-F8E8-420E-9D1F-5F2DE39E5E7E} = {A690BBDB-0F1A-4E6A-9ABA-98D5EB6F6311}
 		{DB8113FF-1BA8-4FA9-923A-FC542876A739} = {18CD568C-94A0-4EB3-92DB-1334E1D339B8}
 		{59B8E04C-FCB9-4C5C-BD60-9E532C760DED} = {EC8CCE86-F3DC-44AC-8732-13BED1A3A74B}
+		{2C9224A3-5747-48F7-9FB2-AD11F89F724A} = {296D05C6-EA4B-4446-8BC8-D99EFC603A0F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {25A65F83-4838-4BC7-ABAA-27B8A9E8A2DD}
