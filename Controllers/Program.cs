@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+
+builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("Test"));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -14,4 +18,6 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI();
 }
 
-builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("Test"));
+app.MapControllers();
+
+app.Run();
