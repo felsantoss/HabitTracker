@@ -2,6 +2,8 @@ using Configuration.Data;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Interfaces;
 using Repositories.UserRepository;
+using Services.Interface;
+using Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,9 @@ builder.Services.AddDbContext<DataContext>(options => options.UseInMemoryDatabas
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
