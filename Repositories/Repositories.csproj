@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Configuration\Configuration.csproj" />
+    <ProjectReference Include="..\Dtos\Dtos.csproj" />
   </ItemGroup>
 
 </Project>

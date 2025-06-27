@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Dtos.Request.User;
+using Models.User;
 
 namespace Repositories.Interfaces
 {
 	public interface IUserRepository
 	{
+		Task Add(User user);
+
+		Task<bool> UserAlreadyRegistred(string email);
 	}
 }
