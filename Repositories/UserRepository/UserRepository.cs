@@ -23,7 +23,7 @@ namespace Repositories.UserRepository
 			await _dataContext.SaveChangesAsync();
 		}
 
-		public async Task<bool> UserAlreadyRegistred(string email)
+		public async Task<bool> UserAlreadyRegistered(string email)
 		{
 			var user = await _dataContext.Users.FindAsync(email);
 

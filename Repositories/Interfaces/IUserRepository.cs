@@ -7,6 +7,6 @@ namespace Repositories.Interfaces
 	{
 		Task Add(User user);
 
-		Task<bool> UserAlreadyRegistred(string email);
+		Task<bool> UserAlreadyRegistered(string email);
 	}
 }
