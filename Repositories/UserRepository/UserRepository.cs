@@ -36,7 +36,7 @@ namespace Repositories.UserRepository
 		{
 			try
 			{
-				var user = await _dataContext.Users.FindAsync(email);
+				var user = await _dataContext.Users.FirstOrDefaultAsync(f => f.Email == email);
 
 				if (user == null)
 					return false;
