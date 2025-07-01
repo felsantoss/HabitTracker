@@ -1,5 +1,4 @@
 ﻿using Configuration.Data;
-using Dtos.Request.User;
 using Microsoft.EntityFrameworkCore;
 using Models.User;
 using Repositories.Interfaces;
@@ -25,14 +24,13 @@ namespace Repositories.UserRepository
 
 				await _dataContext.SaveChangesAsync();
 			}
-			catch (Exception ex)
+			catch
 			{
-				Console.WriteLine(ex.Message);
 				throw;
 			}
 		}
 
-		public async Task<bool> UserAlreadyRegistered(string email)
+		public async Task<bool> ExistsUserByEmailAsync(string email)
 		{
 			try
 			{
@@ -43,9 +41,8 @@ namespace Repositories.UserRepository
 
 				return true;
 			}
-			catch (Exception ex)
+			catch
 			{
-				Console.WriteLine(ex.Message);
 				throw;
 			}
 		}

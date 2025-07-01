@@ -20,7 +20,7 @@ namespace Services.Services
 		{
 			UserValidator.CreateUserValidator(userCreateRequest);
 
-			var userAlreadyExist = await _userRepository.UserAlreadyRegistered(userCreateRequest.Email);
+			var userAlreadyExist = await _userRepository.ExistsUserByEmailAsync(userCreateRequest.Email);
 
 			if (userAlreadyExist)
 				throw new Exception("UserAlreadyRegistered");
@@ -29,7 +29,7 @@ namespace Services.Services
 			{
 				Name = userCreateRequest.Name,
 				Email = userCreateRequest.Email,
-				Password = userCreateRequest.Password,
+				Password = userCreateRequest.Password
 			};
 
 			await _userRepository.Add(user);

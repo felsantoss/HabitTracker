@@ -1,5 +1,4 @@
-﻿using Dtos.Request.User;
-using Models.User;
+﻿using Models.User;
 
 namespace Repositories.Interfaces
 {
@@ -7,6 +6,6 @@ namespace Repositories.Interfaces
 	{
 		Task Add(User user);
 
-		Task<bool> UserAlreadyRegistered(string email);
+		Task<bool> ExistsUserByEmailAsync(string email);
 	}
 }
