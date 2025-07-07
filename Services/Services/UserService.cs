@@ -1,4 +1,5 @@
-﻿using Dtos.Request.User;
+﻿using Configuration.ExceptionHandle;
+using Dtos.Request.User;
 using Dtos.Response.User;
 using Models.User;
 using Repositories.Interfaces;
@@ -23,7 +24,7 @@ namespace Services.Services
 			var userAlreadyExist = await _userRepository.ExistsUserByEmailAsync(userCreateRequest.Email);
 
 			if (userAlreadyExist)
-				throw new Exception("UserAlreadyRegistered");
+				throw new ExceptionHandle("UserAlreadyRegistered");
 
 			var user = new User
 			{
@@ -48,6 +49,10 @@ namespace Services.Services
 				throw new Exception("400");
 
 			var user = await _userRepository.GetByIdAsync(id);
+
+			user.Name = userUpdateRequest.Name;
+
+			await _userRepository.Update(user);
 
 			return true;
 		}
