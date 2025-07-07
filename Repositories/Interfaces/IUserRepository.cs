@@ -6,6 +6,10 @@ namespace Repositories.Interfaces
 	{
 		Task Add(User user);
 
+		Task Update(User user);
+
+		Task<User> GetByIdAsync(int id);
+
 		Task<bool> ExistsUserByEmailAsync(string email);
 	}
 }

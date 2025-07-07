@@ -30,6 +30,28 @@ namespace Repositories.UserRepository
 			}
 		}
 
+		public async Task Update(User user)
+		{
+			try
+			{
+				_dataContext.Update(user);
+
+				await _dataContext.SaveChangesAsync();
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
+
+		public async Task<User> GetByIdAsync(int id)
+		{
+			var user = await _dataContext.Users.FirstOrDefaultAsync(f => f.Id == id)
+				?? throw new Exception("UserNotFound");
+
+			return user;
+		}
+
 		public async Task<bool> ExistsUserByEmailAsync(string email)
 		{
 			try

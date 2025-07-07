@@ -41,5 +41,15 @@ namespace Services.Services
 				Email = user.Email
 			};
 		}
+
+		public async Task<bool> Update(int id, UserUpdateRequest userUpdateRequest)
+		{
+			if (userUpdateRequest == null)
+				throw new Exception("400");
+
+			var user = await _userRepository.GetByIdAsync(id);
+
+			return true;
+		}
 	}
 }
