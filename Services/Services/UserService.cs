@@ -1,9 +1,11 @@
-﻿using Configuration.ExceptionHandle;
+﻿using BCrypt.Net;
+using Configuration.ExceptionHandle;
 using Dtos.Request.User;
 using Dtos.Response.User;
 using Models.User;
 using Repositories.Interfaces;
 using Services.Interface;
+using Services.Security;
 using Services.Validator;
 
 namespace Services.Services
@@ -26,11 +28,13 @@ namespace Services.Services
 			if (userAlreadyExist)
 				throw new ExceptionHandle("UserAlreadyRegistered");
 
+			var encryptedPassword = SecurityHandler.GenerateEncryptedPassword(userCreateRequest.Password);
+
 			var user = new User
 			{
 				Name = userCreateRequest.Name,
 				Email = userCreateRequest.Email,
-				Password = userCreateRequest.Password
+				Password = encryptedPassword
 			};
 
 			await _userRepository.Add(user);
