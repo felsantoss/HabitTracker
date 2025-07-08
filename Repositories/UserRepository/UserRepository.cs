@@ -18,30 +18,16 @@ namespace Repositories.UserRepository
 
 		public async Task Add(User user)
 		{
-			try
-			{
-				_dataContext.Add(user);
+			_dataContext.Add(user);
 
-				await _dataContext.SaveChangesAsync();
-			}
-			catch
-			{
-				throw;
-			}
+			await _dataContext.SaveChangesAsync();
 		}
 
 		public async Task Update(User user)
 		{
-			try
-			{
-				_dataContext.Update(user);
+			_dataContext.Update(user);
 
-				await _dataContext.SaveChangesAsync();
-			}
-			catch (Exception)
-			{
-				throw;
-			}
+			await _dataContext.SaveChangesAsync();
 		}
 
 		public async Task<User> GetByIdAsync(int id)
@@ -54,19 +40,12 @@ namespace Repositories.UserRepository
 
 		public async Task<bool> ExistsUserByEmailAsync(string email)
 		{
-			try
-			{
-				var user = await _dataContext.Users.FirstOrDefaultAsync(f => f.Email == email);
+			var user = await _dataContext.Users.FirstOrDefaultAsync(f => f.Email == email);
 
-				if (user == null)
-					return false;
+			if (user == null)
+				return false;
 
-				return true;
-			}
-			catch
-			{
-				throw;
-			}
+			return true;
 		}
 	}
 }

@@ -45,8 +45,7 @@ namespace Services.Services
 
 		public async Task<bool> Update(int id, UserUpdateRequest userUpdateRequest)
 		{
-			if (userUpdateRequest == null)
-				throw new Exception("400");
+			UserValidator.UpdateUserValidator(userUpdateRequest);
 
 			var user = await _userRepository.GetByIdAsync(id);
 
