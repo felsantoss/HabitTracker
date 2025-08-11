@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Dtos.Response.Token;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Models.User;
 using Services.Interface;
@@ -12,7 +13,7 @@ namespace Services.Services
 	{
 		private readonly string _secretKey = configuration["Jwt:SecretKey"] ?? string.Empty;
 
-		public string GenerateToken(User user)
+		public TokenResponse GenerateToken(User user)
 		{
 			var handler = new JwtSecurityTokenHandler();
 
@@ -24,12 +25,16 @@ namespace Services.Services
 			{
 				Subject = GenerateClaims(user),
 				SigningCredentials = credentials,
-				Expires = DateTime.UtcNow.AddHours(1)
+				Expires = DateTime.UtcNow.AddMinutes(60)
 			};
+			
+			var token = handler.CreateToken(tokenDescriptor).ToString();
 
-			var token = handler.CreateToken(tokenDescriptor); 
-
-			return handler.WriteToken(token);
+			return new TokenResponse
+			{
+				Token = token,
+				ExpiresIn = Convert.ToInt32(DateTime.UtcNow.AddMinutes(60))
+			};
 		}
 
 		private static ClaimsIdentity GenerateClaims(User user)

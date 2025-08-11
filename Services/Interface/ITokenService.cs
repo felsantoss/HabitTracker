@@ -1,9 +1,10 @@
-﻿using Models.User;
+﻿using Dtos.Response.Token;
+using Models.User;
 
 namespace Services.Interface
 {
 	public interface ITokenService
 	{
-		string GenerateToken(User user);
+		TokenResponse GenerateToken(User user);
 	}
 }

@@ -38,6 +38,14 @@ namespace Repositories.UserRepository
 			return user;
 		}
 
+		public async Task<User> GetByEmailAsync(string email)
+		{
+			var user = await _dataContext.Users.FirstOrDefaultAsync(f => f.Email == email)
+				?? throw new Exception("UserNotFound");
+
+			return user;
+		}
+
 		public async Task<bool> ExistsUserByEmailAsync(string email)
 		{
 			var user = await _dataContext.Users.FirstOrDefaultAsync(f => f.Email == email);
