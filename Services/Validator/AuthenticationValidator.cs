@@ -1,32 +1,21 @@
-﻿using BCrypt.Net;
-using Dtos.Request.Login;
-using Repositories.Interfaces;
+﻿using Dtos.Request.Login;
 
 namespace Services.Validator
 {
-	public class AuthenticationValidator
+	public static class AuthenticationValidator
 	{
-		private readonly IUserRepository _userRepository;
-
-		public AuthenticationValidator(IUserRepository userRepository)
-		{
-			_userRepository = userRepository;
-		}
-
-		public async Task<bool> LoginValidation(LoginRequest loginRequest)
+		public static bool LoginValidation(LoginRequest loginRequest, string password)
 		{
 			if (string.IsNullOrEmpty(loginRequest.Email))
-				throw new ArgumentException("error");
+				return false;
 
 			if (string.IsNullOrEmpty(loginRequest.Password))
-				throw new ArgumentException("error");
+				return false;
 
-			var user = await _userRepository.GetByEmailAsync(loginRequest.Email);
-
-			var isPasswordValid = BCrypt.Net.BCrypt.Verify(loginRequest.Password, user.Password);
+			var isPasswordValid = BCrypt.Net.BCrypt.Verify(loginRequest.Password, password);
 
 			if (!isPasswordValid)
-				throw new ArgumentException("error");
+				return false;
 
 			return isPasswordValid;
 		}

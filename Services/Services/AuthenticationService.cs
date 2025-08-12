@@ -2,6 +2,7 @@
 using Dtos.Response.Token;
 using Repositories.Interfaces;
 using Services.Interface;
+using Services.Validator;
 
 namespace Services.Services
 {
@@ -20,9 +21,22 @@ namespace Services.Services
 		public async Task<TokenResponse> Authentication(LoginRequest loginRequest)
 		{
 			if (loginRequest == null)
-				throw new ArgumentNullException(nameof(loginRequest));
+				throw new ArgumentException("error");
 
+			var user = await _userRepository.GetByEmailAsync(loginRequest.Email);
 
+			var isLoginValid = AuthenticationValidator.LoginValidation(loginRequest, user.Password);
+
+			if (!isLoginValid)
+				throw new ArgumentException("error");
+
+			var token = _tokenService.GenerateToken(user);
+
+			return new TokenResponse
+			{
+				Token = token.Token,
+				ExpiresIn = token.ExpiresIn
+			};
 		}
 	}
 }
