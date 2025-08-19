@@ -4,8 +4,6 @@ using Models.User;
 using Moq;
 using Repositories.Interfaces;
 using Services.Services;
-using System.Threading.Tasks;
-
 
 namespace Tests.Tests
 {
