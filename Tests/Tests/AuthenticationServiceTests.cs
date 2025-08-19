@@ -19,7 +19,6 @@ namespace Tests.Tests
 			_tokenServiceMock = new Mock<ITokenService>();
 		}
 
-
 		[Fact(DisplayName = "Should Allow Login When Credencials Is Ok")]
 		public async Task Should_Allow_Login_When_Credencials_Is_Ok()
 		{

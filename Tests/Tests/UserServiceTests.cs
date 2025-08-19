@@ -16,8 +16,6 @@ namespace Tests.Tests
 			_userRepositoryMock = new Mock<IUserRepository>();
 		}
 
-		
-
 		[Fact(DisplayName = "Should Create When Email Not Exists")]
 		public async Task Should_Create_User_When_Email_Not_Exists() 
 		{
