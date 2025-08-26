@@ -1,5 +1,4 @@
-﻿using BCrypt.Net;
-using Configuration.ExceptionHandle;
+﻿using Configuration.ExceptionHandle;
 using Dtos.Request.User;
 using Dtos.Response.User;
 using Models.User;
@@ -10,14 +9,9 @@ using Services.Validator;
 
 namespace Services.Services
 {
-	public class UserService : IUserService
+	public class UserService(IUserRepository userRepository) : IUserService
 	{
-		private readonly IUserRepository _userRepository;
-
-		public UserService(IUserRepository userRepository) 
-		{
-			_userRepository = userRepository;
-		}
+		private readonly IUserRepository _userRepository = userRepository;
 
 		public async Task<UserCreateResponse> Create(UserCreateRequest userCreateRequest)
 		{

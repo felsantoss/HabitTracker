@@ -4,20 +4,13 @@ using Repositories.Interfaces;
 
 namespace Repositories.HabitRepository
 {
-	public class HabitRepository : IHabitRepository
+	public class HabitRepository(DataContext dataContext) : IHabitRepository
 	{
-		private readonly DataContext _dataContext;
-
-		public HabitRepository(DataContext dataContext)
-		{
-			_dataContext = dataContext;
-		}
-
 		public async Task Add(Habit habit)
 		{
-			_dataContext.Add(habit);
+			dataContext.Add(habit);
 
-			await _dataContext.SaveChangesAsync();
+			await dataContext.SaveChangesAsync();
 		}
 	}
 }

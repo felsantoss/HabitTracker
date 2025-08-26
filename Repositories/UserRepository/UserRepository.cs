@@ -7,14 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 namespace Repositories.UserRepository
 {
 	[ExcludeFromCodeCoverage]
-	public class UserRepository : IUserRepository
+	public class UserRepository(DataContext dataContext) : IUserRepository
 	{
-		private readonly DataContext _dataContext;
-
-		public UserRepository(DataContext dataContext)
-		{
-			_dataContext = dataContext;
-		}
+		private readonly DataContext _dataContext = dataContext;
 
 		public async Task Add(User user)
 		{

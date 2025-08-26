@@ -7,14 +7,9 @@ namespace Api.Controllers
 	[ApiController]
 	[Route("v1/api/user")]
 	[Produces("application/json")]
-	public class UserController : ControllerBase
+	public class UserController(IUserService userService) : ControllerBase
 	{
-		private readonly IUserService _userService;
-
-		public UserController(IUserService userService)
-		{
-			_userService = userService;
-		}
+		private readonly IUserService _userService = userService;
 
 		[HttpPost]
 		public async Task<IActionResult> Create(UserCreateRequest userCreateRequest)
