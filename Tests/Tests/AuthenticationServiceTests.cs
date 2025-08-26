@@ -1,5 +1,4 @@
 ﻿using Dtos.Request.Login;
-using Dtos.Response.Token;
 using Models.User;
 using Moq;
 using Repositories.Interfaces;
