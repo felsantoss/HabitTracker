@@ -11,13 +11,11 @@ namespace Services.Services
 {
 	public class UserService(IUserRepository userRepository) : IUserService
 	{
-		private readonly IUserRepository _userRepository = userRepository;
-
 		public async Task<UserCreateResponse> Create(UserCreateRequest userCreateRequest)
 		{
 			UserValidator.CreateUserValidator(userCreateRequest);
 
-			var userAlreadyExist = await _userRepository.ExistsUserByEmailAsync(userCreateRequest.Email);
+			var userAlreadyExist = await userRepository.ExistsUserByEmailAsync(userCreateRequest.Email);
 
 			if (userAlreadyExist)
 				throw new ExceptionHandle("UserAlreadyRegistered");
@@ -31,7 +29,7 @@ namespace Services.Services
 				Password = encryptedPassword
 			};
 
-			await _userRepository.Add(user);
+			await userRepository.Add(user);
 
 			return new UserCreateResponse
 			{
@@ -45,11 +43,11 @@ namespace Services.Services
 		{
 			UserValidator.UpdateUserValidator(userUpdateRequest);
 
-			var user = await _userRepository.GetByIdAsync(id);
+			var user = await userRepository.GetByIdAsync(id);
 
 			user.Name = userUpdateRequest.Name;
 
-			await _userRepository.Update(user);
+			await userRepository.Update(user);
 
 			return true;
 		}

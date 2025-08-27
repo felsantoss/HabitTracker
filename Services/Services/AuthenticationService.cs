@@ -6,31 +6,22 @@ using Services.Validator;
 
 namespace Services.Services
 {
-	public class AuthenticationService : IAuthenticationService
+	public class AuthenticationService(ITokenService tokenService,
+									   IUserRepository userRepository) : IAuthenticationService
 	{
-		private readonly ITokenService _tokenService;
-		private readonly IUserRepository _userRepository;
-
-		public AuthenticationService(ITokenService tokenService, 
-									 IUserRepository userRepository)
-		{
-			_tokenService = tokenService;
-			_userRepository = userRepository;
-		}
-
 		public async Task<TokenResponse> Authentication(LoginRequest loginRequest)
 		{
 			if (loginRequest == null)
 				throw new ArgumentException("error");
 
-			var user = await _userRepository.GetByEmailAsync(loginRequest.Email);
+			var user = await userRepository.GetByEmailAsync(loginRequest.Email);
 
 			var isLoginValid = AuthenticationValidator.LoginValidation(loginRequest, user.Password);
 
 			if (!isLoginValid)
 				throw new ArgumentException("error");
 
-			var token = _tokenService.GenerateToken(user);
+			var token = tokenService.GenerateToken(user);
 
 			return new TokenResponse
 			{

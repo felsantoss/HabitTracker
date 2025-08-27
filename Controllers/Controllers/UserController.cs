@@ -9,12 +9,10 @@ namespace Api.Controllers
 	[Produces("application/json")]
 	public class UserController(IUserService userService) : ControllerBase
 	{
-		private readonly IUserService _userService = userService;
-
 		[HttpPost]
 		public async Task<IActionResult> Create(UserCreateRequest userCreateRequest)
 		{
-			var response = await _userService.Create(userCreateRequest);
+			var response = await userService.Create(userCreateRequest);
 
 			return new ObjectResult(response);
 		}
@@ -22,7 +20,7 @@ namespace Api.Controllers
 		[HttpPut("{id}")]
 		public async Task<IActionResult> Update(int id, UserUpdateRequest userUpdateRequest)
 		{
-			var response = await _userService.Update(id, userUpdateRequest);
+			var response = await userService.Update(id, userUpdateRequest);
 
 			return new ObjectResult(response);
 		}
