@@ -7,9 +7,9 @@ namespace Services.Services
 {
 	public class HabitService(IHabitRepository habitRepository) : IHabitService
 	{
-		public async Task<HabitCreateResponse> Create(UserCreateRequest userCreateRequest)
-		{
+		//public async Task<HabitCreateResponse> Create(UserCreateRequest userCreateRequest)
+		//{
 
-		}
+		//}
 	}
 }
