@@ -27,13 +27,15 @@ namespace Services.Services
 				SigningCredentials = credentials,
 				Expires = DateTime.UtcNow.AddMinutes(60)
 			};
-			
-			var token = handler.CreateToken(tokenDescriptor).ToString();
+
+			var securityToken = handler.CreateToken(tokenDescriptor);
+
+			var token = handler.WriteToken(securityToken);
 
 			return new TokenResponse
 			{
 				Token = token,
-				ExpiresIn = Convert.ToInt32(DateTime.UtcNow.AddMinutes(60))
+				ExpiresIn = 60 // TODO achar forma de colocar o valor aqui
 			};
 		}
 
