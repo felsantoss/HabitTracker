@@ -43,7 +43,7 @@ namespace Services.Services
 		{
 			var claims = new ClaimsIdentity();
 
-			claims.AddClaim(new Claim(ClaimTypes.Name, user.Id.ToString()));
+			claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
 
 			return claims;
 		}
