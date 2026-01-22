@@ -6,6 +6,6 @@ namespace Services.Interface
 {
 	public interface IHabitService
 	{
-		//Task<HabitCreateResponse> Create(HabitCreateRequest habitCreateRequest, int userId);
+		Task<HabitCreateResponse> Create(HabitCreateRequest habitCreateRequest, int userId);
 	}
 }

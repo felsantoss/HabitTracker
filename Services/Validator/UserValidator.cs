@@ -19,10 +19,10 @@ namespace Services.Validator
 		public static void UpdateUserValidator(UserUpdateRequest userUpdateRequest)
 		{
 			if (userUpdateRequest == null)
-				throw new ExceptionHandle("400");
+				throw new ExceptionHandler("400");
 
 			if (string.IsNullOrEmpty(userUpdateRequest.Name))
-				throw new ExceptionHandle("NameIsEmpty");
+				throw new ExceptionHandler("NameIsEmpty");
 		}
 
 		private static void CheckAllFields(UserCreateRequest userCreateRequest)

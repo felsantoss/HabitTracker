@@ -6,8 +6,8 @@ namespace Dtos.Request.Habit
 	[ExcludeFromCodeCoverage]
 	public class HabitCreateRequest
 	{
-		public required string Name { get; set; }
-		public string Description { get; set; } = string.Empty;
-		public DateTime? StartDate { get; set; }
+		public required string Title { get; set; }
+		public string Description { get; set; }
+		public DateTime? Date { get; set; }	
 	}
 }

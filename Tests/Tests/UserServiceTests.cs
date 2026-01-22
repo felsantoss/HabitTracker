@@ -55,7 +55,7 @@ namespace Tests.Tests
 			};
 
 			// Act & Assert
-			var exception = await Assert.ThrowsAsync<ExceptionHandle>(() => service.Create(request));
+			var exception = await Assert.ThrowsAsync<ExceptionHandler>(() => service.Create(request));
 			
 			Assert.Equal("UserAlreadyRegistered", exception.Message);
 		}

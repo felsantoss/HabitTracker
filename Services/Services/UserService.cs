@@ -18,7 +18,7 @@ namespace Services.Services
 			var userAlreadyExist = await userRepository.ExistsUserByEmailAsync(userCreateRequest.Email);
 
 			if (userAlreadyExist)
-				throw new ExceptionHandle("UserAlreadyRegistered");
+				throw new ExceptionHandler("UserAlreadyRegistered");
 
 			var encryptedPassword = SecurityHandler.GenerateEncryptedPassword(userCreateRequest.Password);
 
