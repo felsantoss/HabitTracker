@@ -1,6 +1,5 @@
 ﻿using Configuration.ExceptionHandle;
 using Dtos.Request.User;
-using Models.User;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Services.Validator
@@ -19,10 +18,10 @@ namespace Services.Validator
 		public static void UpdateUserValidator(UserUpdateRequest userUpdateRequest)
 		{
 			if (userUpdateRequest == null)
-				throw new ExceptionHandler("400");
+				throw new ValidationException("400");
 
 			if (string.IsNullOrEmpty(userUpdateRequest.Name))
-				throw new ExceptionHandler("NameIsEmpty");
+				throw new ValidationException("NameIsEmpty");
 		}
 
 		private static void CheckAllFields(UserCreateRequest userCreateRequest)

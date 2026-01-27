@@ -3,7 +3,7 @@
 namespace Dtos.Response.Habit
 {
 	[ExcludeFromCodeCoverage]
-	public class HabitCreateResponse
+	public class HabitResponse
 	{
 		public int Id { get; set; }
 		public string Title { get; set; } = string.Empty;

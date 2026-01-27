@@ -1,11 +1,13 @@
-﻿using Dtos.Request.Habit;
-using Dtos.Request.User;
+﻿using Dtos.Pagination;
+using Dtos.Request.Habit;
 using Dtos.Response.Habit;
 
 namespace Services.Interface
 {
 	public interface IHabitService
 	{
-		Task<HabitCreateResponse> Create(HabitCreateRequest habitCreateRequest, int userId);
-	}
+		Task<PagedResult<HabitResponse>> Get(PaginationQuery request, int userId);
+		
+		Task<HabitResponse> Create(HabitCreateRequest habitCreateRequest, int userId);
+	} 
 }
