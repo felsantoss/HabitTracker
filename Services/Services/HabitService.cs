@@ -63,5 +63,10 @@ namespace Services.Services
 				StartDate = habit.StartDate
 			};
 		}
+
+		public async Task<bool> CheckIn(int userId, int habitId)
+		{
+			
+		} 
 	}
 }

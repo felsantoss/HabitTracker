@@ -23,7 +23,7 @@ public static class HabitValidator
 
         if (!string.IsNullOrEmpty(habitCreateRequest.Description))
         {
-            
+            // TODO
         }
     }
 }

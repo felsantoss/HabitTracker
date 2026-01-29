@@ -40,5 +40,19 @@ namespace Api.Controllers
 
 			return new ObjectResult(response);
 		}
+
+		[HttpPost("{habitId}/checkin")]
+		[Authorize]
+		public async Task<IActionResult> CheckIn(int habitId)
+		{
+			var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+			
+			if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId)) 
+				return Unauthorized("Não foi possível identificar o usuário.");
+
+			var response = await habitService.CheckIn(userId, habitId);
+			
+			return new ObjectResult(response);
+		}
 	}
 }
