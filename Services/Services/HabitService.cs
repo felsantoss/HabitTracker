@@ -9,7 +9,8 @@ using Services.Validator;
 
 namespace Services.Services
 {
-	public class HabitService(IHabitRepository habitRepository) : IHabitService
+	public class HabitService(IHabitRepository habitRepository, 
+		                      ICheckInRepository checkInRepository) : IHabitService
 	{
 		public async Task<PagedResult<HabitResponse>> Get(PaginationQuery request, int userId)
 		{
@@ -66,7 +67,26 @@ namespace Services.Services
 
 		public async Task<bool> CheckIn(int userId, int habitId)
 		{
+			var habit = await habitRepository.GetHabitByIdAndUserId(habitId, userId);
+
+			var currentDate = DateTime.UtcNow;
 			
+			var checkInAlreadyExists = await checkInRepository.CheckInAlreadyExists(habit.Id, userId, DateOnly.FromDateTime(currentDate));
+			
+			if (checkInAlreadyExists)
+				throw new ValidationException("Check in already exists");
+
+			var checkIn = new HabitCheckIn
+			{
+				HabitId = habitId,
+				UserId = userId,
+				Date = DateOnly.FromDateTime(currentDate),
+				CreatAt = currentDate
+			};
+			
+			await checkInRepository.Add(checkIn);	
+			
+			return true;
 		} 
 	}
 }
