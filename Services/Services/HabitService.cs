@@ -81,7 +81,7 @@ namespace Services.Services
 				HabitId = habitId,
 				UserId = userId,
 				Date = DateOnly.FromDateTime(currentDate),
-				CreatAt = currentDate
+				CreatedAt = currentDate
 			};
 			
 			await checkInRepository.Add(checkIn);	
