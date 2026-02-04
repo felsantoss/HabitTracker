@@ -1,5 +1,6 @@
 ﻿using Dtos.Pagination;
 using Dtos.Request.Habit;
+using Dtos.Response.CheckIn;
 using Dtos.Response.Habit;
 
 namespace Services.Interface
@@ -10,6 +11,8 @@ namespace Services.Interface
 		
 		Task<HabitResponse> Create(HabitCreateRequest habitCreateRequest, int userId);
 		
-		Task<bool> CheckIn(int userId, int habitId);
+		Task<CheckInResponse> GetCheckIn(int userId, int habitId);
+		
+		Task<bool> CreateCheckIn(int userId, int habitId);
 	} 
 }

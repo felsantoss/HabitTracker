@@ -1,6 +1,7 @@
 ﻿using Configuration.ExceptionHandle;
 using Dtos.Pagination;
 using Dtos.Request.Habit;
+using Dtos.Response.CheckIn;
 using Dtos.Response.Habit;
 using Models.Habit;
 using Repositories.Interfaces;
@@ -65,7 +66,12 @@ namespace Services.Services
 			};
 		}
 
-		public async Task<bool> CheckIn(int userId, int habitId)
+		public async Task<CheckInResponse> GetCheckIn(int userId, int habitId)
+		{
+			
+		}
+		
+		public async Task<bool> CreateCheckIn(int userId, int habitId)
 		{
 			var habit = await habitRepository.GetHabitByIdAndUserId(habitId, userId);
 

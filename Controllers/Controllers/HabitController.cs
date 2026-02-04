@@ -41,6 +41,21 @@ namespace Api.Controllers
 			return new ObjectResult(response);
 		}
 
+
+		[HttpGet("{habitId}/checkins")]
+		[Authorize]
+		public async Task<IActionResult> GetCheckIn(int habitId)
+		{
+			var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+			
+			if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId)) 
+				return Unauthorized("Não foi possível identificar o usuário.");
+			
+			var response = await habitService.GetCheckIn(userId, habitId);
+			
+			return new ObjectResult(response);
+		}
+		
 		[HttpPost("{habitId}/checkin")]
 		[Authorize]
 		public async Task<IActionResult> CheckIn(int habitId)
@@ -50,7 +65,7 @@ namespace Api.Controllers
 			if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId)) 
 				return Unauthorized("Não foi possível identificar o usuário.");
 
-			var response = await habitService.CheckIn(userId, habitId);
+			var response = await habitService.CreateCheckIn(userId, habitId);
 			
 			return new ObjectResult(response);
 		}
