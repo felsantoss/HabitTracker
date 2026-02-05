@@ -1,5 +1,3 @@
-using Models.User;
-
 namespace Models.Habit;
 
 public class HabitCheckIn

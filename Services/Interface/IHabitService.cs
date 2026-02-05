@@ -10,8 +10,8 @@ namespace Services.Interface
 		Task<PagedResult<HabitResponse>> Get(PaginationQuery request, int userId);
 		
 		Task<HabitResponse> Create(HabitCreateRequest habitCreateRequest, int userId);
-		
-		Task<CheckInResponse> GetCheckIn(int userId, int habitId);
+
+		Task<CheckInResponse> GetCheckIn(int userId, int habitId, PaginationQuery pagination);
 		
 		Task<bool> CreateCheckIn(int userId, int habitId);
 	} 

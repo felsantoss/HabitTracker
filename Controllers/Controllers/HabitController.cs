@@ -44,16 +44,16 @@ namespace Api.Controllers
 
 		[HttpGet("{habitId}/checkins")]
 		[Authorize]
-		public async Task<IActionResult> GetCheckIn(int habitId)
+		public async Task<IActionResult> GetCheckIn(int habitId, [FromQuery] PaginationQuery pagination)
 		{
 			var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-			
-			if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId)) 
+
+			if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId))
 				return Unauthorized("Não foi possível identificar o usuário.");
-			
-			var response = await habitService.GetCheckIn(userId, habitId);
-			
-			return new ObjectResult(response);
+
+			var response = await habitService.GetCheckIn(userId, habitId, pagination);
+
+			return Ok(response);
 		}
 		
 		[HttpPost("{habitId}/checkin")]

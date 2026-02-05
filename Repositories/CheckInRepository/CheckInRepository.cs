@@ -11,19 +11,20 @@ public class CheckInRepository(DataContext dataContext) : ICheckInRepository
     public async Task<PagedResult<HabitCheckIn>> GetCheckInPaginated(int userId, int habitId, PaginationQuery pagination)
     {
         var query = dataContext.Set<HabitCheckIn>()
+                               .AsNoTracking()
                                .Where(h => h.UserId == userId && h.HabitId == habitId)
-                               .OrderBy(h => h.Date);
+                               .OrderByDescending(h => h.Date);
         
         var total = await query.CountAsync();
         
-        var checkIns = await query.Skip(pagination.Skip).Take(pagination.PageSize).ToListAsync();
+        var items = await query.Skip(pagination.Skip).Take(pagination.PageSize).ToListAsync();
 
         return new PagedResult<HabitCheckIn>()
         {
             PageNumber = pagination.PageNumber,
             PageSize = pagination.PageSize,
             TotalItems = total,
-            Items = checkIns
+            Items = items
         };
     }
     

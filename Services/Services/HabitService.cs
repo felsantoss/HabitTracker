@@ -66,9 +66,27 @@ namespace Services.Services
 			};
 		}
 
-		public async Task<CheckInResponse> GetCheckIn(int userId, int habitId)
+		public async Task<CheckInResponse> GetCheckIn(int userId, int habitId, PaginationQuery pagination)
 		{
+			if (pagination == null)
+				throw new ValidationException("Invalid pagination");
 			
+			var habit = await habitRepository.GetHabitByIdAndUserId(habitId, userId);
+			
+			var pagedResult = await checkInRepository.GetCheckInPaginated(userId, habit.Id, pagination);
+
+			return new CheckInResponse
+			{
+				HabitId = habit.Id,
+				PageNumber = pagedResult.PageNumber,
+				PageSize = pagedResult.PageSize,
+				TotalItems = pagedResult.TotalItems,
+				Items = pagedResult.Items.Select(ci => new CheckInItemResponse
+				{
+					Date = ci.Date,
+					CreatedAt = ci.CreatedAt
+				}).ToList()
+			};
 		}
 		
 		public async Task<bool> CreateCheckIn(int userId, int habitId)

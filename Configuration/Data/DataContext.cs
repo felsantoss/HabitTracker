@@ -3,10 +3,8 @@ using Models.User;
 
 namespace Configuration.Data
 {
-	public class DataContext : DbContext
+	public class DataContext(DbContextOptions<DataContext> options) : DbContext
 	{
-		public DataContext(DbContextOptions<DataContext> options) : base(options) {}
-
 		public DbSet<User> Users { get; set; }
 	}
 }
