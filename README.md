@@ -22,7 +22,7 @@ Este projeto foi construído com as seguintes tecnologias:
 |------------|-----|
 | .NET (C#) | Linguagem e framework principal |
 | ASP.NET Core | Desenvolvimento de API |
-| Entity Framework Core / ORM |
+| Entity Framework Core | ORM |
 | Xunit / MSTest | Testes |
 | Git & GitHub | Versionamento de código |
 
