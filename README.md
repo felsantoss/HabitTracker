@@ -26,8 +26,6 @@ Este projeto foi construído com as seguintes tecnologias:
 | Xunit / MSTest | Testes |
 | Git & GitHub | Versionamento de código |
 
-> ⚠️ Se houver outras libs no projeto (como AutoMapper, Swashbuckle/Swagger, FluentValidation etc.), inclua aqui também.
-
 ## 🛠️ Pré-requisitos
 
 Antes de executar este projeto, você precisará ter instalado:
