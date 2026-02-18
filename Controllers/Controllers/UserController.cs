@@ -1,4 +1,5 @@
 ﻿using Dtos.Request.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interface;
 
@@ -18,6 +19,7 @@ namespace Api.Controllers
 		}
 
 		[HttpPut("{id}")]
+		[Authorize]
 		public async Task<IActionResult> Update(int id, UserUpdateRequest userUpdateRequest)
 		{
 			var response = await userService.Update(id, userUpdateRequest);
