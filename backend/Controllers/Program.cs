@@ -1,6 +1,8 @@
 using Configuration.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Repositories.CheckInRepository;
+using Repositories.HabitRepository;
 using Repositories.Interfaces;
 using Repositories.UserRepository;
 using Services.Interface;
@@ -17,9 +19,25 @@ builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(connecti
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("Frontend", policy =>
+	{
+		policy
+			.WithOrigins(
+				"http://localhost:5173",
+				"http://127.0.0.1:5173"
+			)
+			.AllowAnyHeader()
+			.AllowAnyMethod();
+	});
+});
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IHabitRepository, HabitRepository>();
+builder.Services.AddScoped<ICheckInRepository, CheckInRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IHabitService, HabitService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
@@ -45,6 +63,10 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
+
+app.UseCors("Frontend");
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

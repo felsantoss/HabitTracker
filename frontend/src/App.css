@@ -1,42 +1,235 @@
-#root {
-  max-width: 1280px;
+.shell {
+  min-height: 100vh;
+  padding: 32px;
+}
+
+.auth-shell {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.app-shell {
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.hero-panel,
+.panel {
+  border: 1px solid var(--border-color);
+  border-radius: 28px;
+  background: rgba(255, 248, 238, 0.88);
+  box-shadow: 0 24px 60px rgba(43, 30, 18, 0.08);
+  backdrop-filter: blur(12px);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.hero-panel {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    radial-gradient(circle at top left, rgba(228, 154, 75, 0.18), transparent 35%),
+    rgba(255, 248, 238, 0.92);
+}
+
+.panel {
+  padding: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+}
+
+.hero-panel h1,
+.dashboard-title,
+.panel h2,
+.habit-card h3 {
+  margin: 0;
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.hero-panel h1 {
+  font-size: clamp(2.4rem, 5vw, 4.7rem);
+  line-height: 0.95;
+  max-width: 10ch;
+}
+
+.hero-copy,
+.section-copy,
+.habit-description,
+.habit-date,
+.inline-message,
+.empty-state,
+.pagination span {
+  color: var(--muted-text);
+}
+
+.hero-copy {
+  max-width: 52ch;
+  margin: 20px 0 28px;
+  font-size: 1.05rem;
+}
+
+.hero-points {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.auth-panel {
+  align-self: center;
+  max-width: 480px;
+  width: 100%;
+}
+
+.auth-switch {
+  display: inline-grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 28px;
+  padding: 6px;
+  border-radius: 999px;
+  background: var(--surface-muted);
+}
+
+.auth-switch button {
+  padding: 10px 16px;
+  background: transparent;
+  color: var(--text-color);
+}
+
+.auth-switch .active {
+  background: var(--surface-color);
+}
+
+.form-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.form-grid label {
+  display: grid;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.form-error,
+.form-success,
+.inline-message {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+.form-error {
+  background: rgba(185, 58, 58, 0.12);
+  color: #8b1e1e;
+}
+
+.form-success,
+.inline-message {
+  background: rgba(104, 143, 91, 0.14);
+  color: #325725;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.dashboard-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.section-header,
+.habit-card-header,
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.habit-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.habit-card {
+  padding: 20px;
+  border-radius: 22px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-color);
+}
+
+.habit-date {
+  margin: 6px 0 0;
+}
+
+.habit-description {
+  margin: 18px 0 0;
+}
+
+.empty-state {
+  margin: 32px 0 0;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+.ghost-button {
+  background: transparent;
+  color: var(--text-color);
+}
+
+@media (max-width: 900px) {
+  .auth-shell,
+  .dashboard-grid {
+    grid-template-columns: 1fr;
   }
-  to {
-    transform: rotate(360deg);
+
+  .hero-panel {
+    padding: 32px;
+  }
+
+  .topbar,
+  .section-header,
+  .habit-card-header,
+  .pagination {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 640px) {
+  .shell {
+    padding: 16px;
   }
-}
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  .panel,
+  .hero-panel {
+    padding: 22px;
+    border-radius: 22px;
+  }
 }
