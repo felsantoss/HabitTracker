@@ -1,11 +1,13 @@
 import { useState } from 'react'
 
+// Estado inicial vazio compartilhado entre os modos de login e registro.
 const INITIAL_VALUES = {
   name: '',
   email: '',
   password: '',
 }
 
+// Controla a UI de autenticação e envia os dados ao componente pai no submit.
 function AuthForm({
   mode,
   loading,
@@ -16,6 +18,7 @@ function AuthForm({
 }) {
   const [formData, setFormData] = useState(INITIAL_VALUES)
 
+  // Atualiza o campo correto com base no atributo name do input.
   function handleChange(event) {
     const { name, value } = event.target
     setFormData((current) => ({
@@ -24,6 +27,7 @@ function AuthForm({
     }))
   }
 
+  // Envia dados de autenticação e limpa campos conforme o modo atual.
   async function handleSubmit(event) {
     event.preventDefault()
     const success = await onSubmit(formData)
@@ -32,6 +36,7 @@ function AuthForm({
       return
     }
 
+    // Após registro com sucesso, mantém nome/email e limpa só a senha.
     if (mode === 'register') {
       setFormData((current) => ({
         ...current,
@@ -40,9 +45,11 @@ function AuthForm({
       return
     }
 
+    // Após login com sucesso, limpa todos os campos.
     setFormData(INITIAL_VALUES)
   }
 
+  // Alterna entre login/registro e reinicia o formulário.
   function handleModeChange(nextMode) {
     onToggleMode(nextMode)
     setFormData(INITIAL_VALUES)

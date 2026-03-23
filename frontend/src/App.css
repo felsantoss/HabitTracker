@@ -1,6 +1,34 @@
 .shell {
+  position: relative;
   min-height: 100vh;
   padding: 32px;
+  isolation: isolate;
+}
+
+.shell::before,
+.shell::after {
+  content: '';
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(42px);
+}
+
+.shell::before {
+  width: 260px;
+  height: 260px;
+  top: -88px;
+  right: 6%;
+  background: rgba(20, 99, 212, 0.18);
+}
+
+.shell::after {
+  width: 300px;
+  height: 300px;
+  left: -100px;
+  bottom: 6%;
+  background: rgba(67, 171, 140, 0.18);
 }
 
 .auth-shell {
@@ -18,10 +46,13 @@
 .hero-panel,
 .panel {
   border: 1px solid var(--border-color);
-  border-radius: 28px;
-  background: rgba(255, 248, 238, 0.88);
-  box-shadow: 0 24px 60px rgba(43, 30, 18, 0.08);
-  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  background: var(--surface-color);
+  box-shadow:
+    0 24px 60px rgba(17, 41, 73, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.52);
+  backdrop-filter: blur(14px);
+  animation: fade-rise 420ms ease both;
 }
 
 .hero-panel {
@@ -30,8 +61,8 @@
   flex-direction: column;
   justify-content: center;
   background:
-    radial-gradient(circle at top left, rgba(228, 154, 75, 0.18), transparent 35%),
-    rgba(255, 248, 238, 0.92);
+    linear-gradient(130deg, rgba(255, 255, 255, 0.97), rgba(237, 245, 255, 0.88)),
+    radial-gradient(circle at 4% 12%, rgba(20, 99, 212, 0.12), transparent 36%);
 }
 
 .panel {
@@ -40,9 +71,9 @@
 
 .eyebrow {
   margin: 0 0 10px;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent-color);
 }
@@ -52,12 +83,13 @@
 .panel h2,
 .habit-card h3 {
   margin: 0;
-  font-family: 'Georgia', 'Times New Roman', serif;
+  font-family: 'Fraunces', 'Georgia', serif;
+  color: #122138;
 }
 
 .hero-panel h1 {
-  font-size: clamp(2.4rem, 5vw, 4.7rem);
-  line-height: 0.95;
+  font-size: clamp(2.2rem, 5vw, 4.3rem);
+  line-height: 0.98;
   max-width: 10ch;
 }
 
@@ -74,7 +106,7 @@
 .hero-copy {
   max-width: 52ch;
   margin: 20px 0 28px;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 .hero-points {
@@ -82,6 +114,7 @@
   padding-left: 18px;
   display: grid;
   gap: 12px;
+  color: #28405f;
 }
 
 .auth-panel {
@@ -97,17 +130,26 @@
   margin-bottom: 28px;
   padding: 6px;
   border-radius: 999px;
-  background: var(--surface-muted);
+  background: rgba(20, 99, 212, 0.08);
 }
 
 .auth-switch button {
   padding: 10px 16px;
   background: transparent;
   color: var(--text-color);
+  box-shadow: none;
+  transform: none;
 }
 
 .auth-switch .active {
-  background: var(--surface-color);
+  background: var(--surface-strong);
+  box-shadow: 0 6px 16px rgba(17, 41, 73, 0.16);
+}
+
+.auth-switch button:hover:not(:disabled) {
+  transform: none;
+  box-shadow: none;
+  filter: none;
 }
 
 .form-grid {
@@ -131,14 +173,14 @@
 }
 
 .form-error {
-  background: rgba(185, 58, 58, 0.12);
-  color: #8b1e1e;
+  background: rgba(190, 64, 64, 0.12);
+  color: #8a2020;
 }
 
 .form-success,
 .inline-message {
-  background: rgba(104, 143, 91, 0.14);
-  color: #325725;
+  background: rgba(45, 131, 108, 0.14);
+  color: #1b614d;
 }
 
 .topbar {
@@ -150,7 +192,7 @@
 }
 
 .dashboard-title {
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 4vw, 3rem);
 }
 
 .dashboard-grid {
@@ -177,9 +219,20 @@
 
 .habit-card {
   padding: 20px;
-  border-radius: 22px;
+  border-radius: 18px;
   border: 1px solid var(--border-color);
-  background: var(--surface-color);
+  background: var(--surface-strong);
+  box-shadow: 0 14px 30px rgba(17, 41, 73, 0.08);
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+
+.habit-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 36px rgba(17, 41, 73, 0.13);
+  border-color: rgba(20, 99, 212, 0.22);
 }
 
 .habit-date {
@@ -199,8 +252,26 @@
 }
 
 .ghost-button {
-  background: transparent;
-  color: var(--text-color);
+  background: rgba(20, 99, 212, 0.08);
+  color: #173864;
+  box-shadow: none;
+}
+
+.ghost-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(20, 99, 212, 0.16);
+}
+
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 900px) {
@@ -230,6 +301,6 @@
   .panel,
   .hero-panel {
     padding: 22px;
-    border-radius: 22px;
+    border-radius: 20px;
   }
 }

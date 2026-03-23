@@ -1,29 +1,32 @@
-# Repository Guidelines
+# Diretrizes do Repositório
 
-## Project Structure & Module Organization
-This repository is split into `backend/` and `frontend/`. The backend is a .NET 8 solution in `backend/HabitTracker.sln` with layered projects: `Controllers/` for API entry points, `Services/` for business logic, `Repositories/` for data access, `Models/` for entities, `Dtos/` for request/response contracts, `Configuration/` for EF Core and exception handling, and `Tests/` for xUnit coverage. The frontend lives in `frontend/` as a Vite + React app; application code is under `frontend/src/`, and static assets are under `frontend/public/`.
+## Estrutura do Projeto e Organização dos Módulos
+Este repositório está dividido em `backend/` e `frontend/`. O backend é uma solução .NET 8 em `backend/HabitTracker.sln`, com projetos em camadas: `Controllers/` para pontos de entrada da API, `Services/` para lógica de negócio, `Repositories/` para acesso a dados, `Models/` para entidades, `Dtos/` para contratos de requisição/resposta, `Configuration/` para EF Core e tratamento de exceções, e `Tests/` para cobertura com xUnit. O frontend fica em `frontend/` como uma aplicação Vite + React; o código da aplicação está em `frontend/src/` e os assets estáticos em `frontend/public/`.
 
-## Build, Test, and Development Commands
-Backend:coo
-- `dotnet restore backend/HabitTracker.sln` installs solution dependencies.
-- `dotnet build backend/HabitTracker.sln` compiles all backend projects.
-- `dotnet run --project backend/Controllers/Api.csproj` starts the API with Swagger in development.
-- `dotnet test backend/Tests/Tests.csproj` runs the xUnit test suite.
+## Comandos de Build, Teste e Desenvolvimento
+Backend:
+- `dotnet restore backend/HabitTracker.sln` instala as dependências da solução.
+- `dotnet build backend/HabitTracker.sln` compila todos os projetos do backend.
+- `dotnet run --project backend/Controllers/Api.csproj` inicia a API com Swagger em desenvolvimento.
+- `dotnet test backend/Tests/Tests.csproj` executa a suíte de testes xUnit.
 
 Frontend:
-- `npm install --prefix frontend` installs Node dependencies.
-- `npm run dev --prefix frontend` starts the Vite dev server.
-- `npm run build --prefix frontend` creates a production bundle in `frontend/dist/`.
-- `npm run lint --prefix frontend` runs ESLint.
+- `npm install --prefix frontend` instala as dependências Node.
+- `npm run dev --prefix frontend` inicia o servidor de desenvolvimento do Vite.
+- `npm run build --prefix frontend` gera o bundle de produção em `frontend/dist/`.
+- `npm run lint --prefix frontend` executa o ESLint.
 
-## Coding Style & Naming Conventions
-Follow the existing project style instead of reformatting opportunistically. C# uses PascalCase for types and public members, camelCase for locals/parameters, and one class per file. React files use PascalCase for components such as `App.jsx`; keep hooks and local helpers in camelCase. The frontend currently uses 2-space indentation and the backend mostly uses tabs; preserve the surrounding file style. Run `npm run lint --prefix frontend` before submitting frontend changes.
+## Estilo de Código e Convenções de Nomenclatura
+Siga o estilo existente do projeto em vez de reformatar oportunisticamente. Em C#, use PascalCase para tipos e membros públicos, camelCase para variáveis/parâmetros locais, e uma classe por arquivo. Em React, arquivos usam PascalCase para componentes como `App.jsx`; mantenha hooks e helpers locais em camelCase. O frontend atualmente usa indentação de 2 espaços e o backend usa principalmente tabs; preserve o estilo do arquivo ao redor. Execute `npm run lint --prefix frontend` antes de submeter alterações no frontend.
 
-## Testing Guidelines
-Backend tests use xUnit with Moq in `backend/Tests/Tests/`. Name test files after the service under test, and use descriptive method names such as `Should_Create_User_When_Email_Not_Exists`. Add or update tests for service-layer behavior when changing validation, authentication, or persistence rules. There is no frontend test setup yet, so document manual verification steps in PRs for UI work.
+## Diretrizes de Testes
+Os testes do backend usam xUnit com Moq em `backend/Tests/Tests/`. Nomeie arquivos de teste com base no serviço testado e use nomes de método descritivos como `Should_Create_User_When_Email_Not_Exists`. Adicione ou atualize testes de comportamento da camada de serviço ao alterar regras de validação, autenticação ou persistência. Ainda não há setup de testes para frontend, então documente os passos de validação manual nos PRs de UI.
 
-## Commit & Pull Request Guidelines
-Recent commits use short, lowercase, imperative summaries such as `adding authorize`, `init front`, and `feature get check in`. Prefer concise subject lines focused on one change. PRs should include a clear summary, affected area (`backend`, `frontend`, or both), linked issue if available, test results, and screenshots or sample API payloads for UI or contract changes.
+## Diretrizes de Commit e Pull Request
+Commits recentes usam resumos curtos, em minúsculas e no imperativo, como `adding authorize`, `init front` e `feature get check in`. Prefira linhas de assunto concisas focadas em uma única mudança. PRs devem incluir um resumo claro, área afetada (`backend`, `frontend` ou ambos), issue vinculada (se houver), resultados de testes e screenshots ou payloads de API de exemplo para alterações de UI ou contrato.
 
-## Security & Configuration Tips
-The API reads SQLite and JWT settings from `backend/Controllers/appsettings.json`. Treat secrets there as development-only, avoid committing real credentials, and do not commit local database changes unless the schema itself changed.
+## Dicas de Segurança e Configuração
+A API lê configurações de SQLite e JWT de `backend/Controllers/appsettings.json`. Trate os segredos ali como apenas para desenvolvimento, evite commitar credenciais reais e não versione mudanças de banco local, a menos que o schema em si tenha mudado.
+
+## Fluxo de Aprovação de Alterações
+Antes de qualquer alteração em arquivos deste repositório, apresente de forma objetiva o que será modificado (plano curto e/ou diff proposto) e aguarde aprovação explícita do solicitante. Somente após essa validação as alterações devem ser aplicadas.

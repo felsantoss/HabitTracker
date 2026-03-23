@@ -12,6 +12,7 @@ import {
   registerUser,
 } from './services/api.js'
 
+// Componente raiz: coordena o fluxo de autenticação e o estado do dashboard.
 function App() {
   const [token, setToken] = useState(() => getToken())
   const [mode, setMode] = useState('login')
@@ -28,8 +29,10 @@ function App() {
   const [authError, setAuthError] = useState('')
   const [authMessage, setAuthMessage] = useState('')
   const [dashboardMessage, setDashboardMessage] = useState('')
+  // Mantém o pageSize mais recente sem recriar a função loadHabits.
   const pageSizeRef = useRef(pagination.pageSize)
 
+  // Limpa a autenticação persistida e reseta o estado do dashboard.
   const handleLogout = useCallback(() => {
     clearToken()
     setToken('')
@@ -42,6 +45,7 @@ function App() {
     })
   }, [])
 
+  // Busca hábitos da página solicitada e atualiza os metadados da paginação.
   const loadHabits = useCallback(
     async (currentToken, pageNumber) => {
       setHabitsLoading(true)
@@ -77,6 +81,7 @@ function App() {
     [handleLogout],
   )
 
+  // Quando token ou página atual mudam, recarrega os hábitos do dashboard.
   useEffect(() => {
     if (!token) {
       setHabits([])
@@ -86,6 +91,7 @@ function App() {
     loadHabits(token, pagination.pageNumber)
   }, [token, pagination.pageNumber, loadHabits])
 
+  // Executa registro/login conforme o modo atual e salva JWT no login.
   async function handleAuthenticate(formData) {
     setAuthLoading(true)
     setAuthError('')
@@ -112,6 +118,7 @@ function App() {
     }
   }
 
+  // Cria um novo hábito, adiciona no topo da UI e atualiza o total.
   async function handleCreateHabit(formData) {
     setHabitSubmitting(true)
     setDashboardMessage('')
@@ -133,6 +140,7 @@ function App() {
     }
   }
 
+  // Realiza o check-in de hoje para um hábito específico.
   async function handleCheckIn(habitId) {
     setDashboardMessage('')
 
@@ -144,6 +152,7 @@ function App() {
     }
   }
 
+  // Muda para outra página; o reload dos dados é feito pelo useEffect.
   function handlePageChange(nextPage) {
     setPagination((current) => ({
       ...current,

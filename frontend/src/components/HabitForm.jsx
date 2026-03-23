@@ -1,14 +1,17 @@
 import { useState } from 'react'
 
+// Estado inicial dos campos do formulário de criação de hábito.
 const INITIAL_VALUES = {
   title: '',
   description: '',
   date: '',
 }
 
+// Coleta dados do hábito e delega o envio para o componente pai.
 function HabitForm({ loading, onSubmit }) {
   const [formData, setFormData] = useState(INITIAL_VALUES)
 
+  // Mantém o estado do formulário sincronizado com input/textarea por name.
   function handleChange(event) {
     const { name, value } = event.target
     setFormData((current) => ({
@@ -17,6 +20,7 @@ function HabitForm({ loading, onSubmit }) {
     }))
   }
 
+  // Evita reload da página, envia dados ao pai e limpa só em caso de sucesso.
   async function handleSubmit(event) {
     event.preventDefault()
     const success = await onSubmit(formData)
