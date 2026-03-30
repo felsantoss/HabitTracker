@@ -9,7 +9,7 @@ namespace Tests.Tests
 {
 	public class UserServiceTests
 	{
-		private Mock<IUserRepository> _userRepositoryMock;
+		private readonly Mock<IUserRepository> _userRepositoryMock;
 
 		public UserServiceTests()
 		{
