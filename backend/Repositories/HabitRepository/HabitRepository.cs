@@ -35,8 +35,7 @@ namespace Repositories.HabitRepository
 		
 		public async Task<Habit> GetHabitByIdAndUserId(int habitId, int userId)
 		{
-			var query = await dataContext.Set<Habit>()
-				          .FirstOrDefaultAsync(f => f.Id == habitId && f.UserId == userId && f.IsEnabled) 
+			var query = await dataContext.Set<Habit>().FirstOrDefaultAsync(f => f.Id == habitId && f.UserId == userId && f.IsEnabled) 
 			            ?? throw new ValidationException("Habit not found");
 			
 			return query;
