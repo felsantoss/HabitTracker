@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using Configuration.Data;
 using Dtos.Pagination;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using Repositories.Interfaces;
 
 namespace Repositories.HabitRepository
 {
+	[ExcludeFromCodeCoverage]
 	public class HabitRepository(DataContext dataContext) : IHabitRepository
 	{
 		public async Task<PagedResult<Habit>> GetPaginatedAsync(int userId, PaginationQuery pagination)

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Configuration.Data;
 using Dtos.Pagination;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using Repositories.Interfaces;
 
 namespace Repositories.CheckInRepository;
 
+[ExcludeFromCodeCoverage]
 public class CheckInRepository(DataContext dataContext) : ICheckInRepository
 {
     public async Task<PagedResult<HabitCheckIn>> GetCheckInPaginated(int userId, int habitId, PaginationQuery pagination)

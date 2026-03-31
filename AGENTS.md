@@ -33,6 +33,7 @@ Antes de qualquer alteração em arquivos deste repositório, apresente de forma
 
 ## Mensagem de commit
 Mensagem curta e objetiva das alterações sempre em inglês
+- Ao final de cada execução com alterações de código, sugerir uma mensagem de commit curta, objetiva e em inglês.
 
 ## Alterações no projeto backend
 Sempre após cada alteração de código, executar:
@@ -40,3 +41,4 @@ Sempre após cada alteração de código, executar:
 - `dotnet clean backend/HabitTracker.sln`
 - `dotnet build backend/HabitTracker.sln`
 - `dotnet test backend/Tests/Tests.csproj`
+- Todas as classes de `Models`, `Dtos` e `Repository` no backend devem receber o atributo `ExcludeFromCodeCoverage`.

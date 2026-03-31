@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Models.Habit;
 
+[ExcludeFromCodeCoverage]
 public class HabitCheckIn
 {
     public int Id { get; set; }

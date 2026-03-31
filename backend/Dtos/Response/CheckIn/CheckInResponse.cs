@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Dtos.Response.CheckIn;
 
+[ExcludeFromCodeCoverage]
 public class CheckInResponse
 {
     public int HabitId { get; set; }
@@ -9,6 +12,7 @@ public class CheckInResponse
     public List<CheckInItemResponse> Items { get; set; } = [];
 }
 
+[ExcludeFromCodeCoverage]
 public class CheckInItemResponse
 {
     public DateOnly Date { get; set; }

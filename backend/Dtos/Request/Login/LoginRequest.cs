@@ -1,5 +1,8 @@
-﻿namespace Dtos.Request.Login
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Dtos.Request.Login
 {
+	[ExcludeFromCodeCoverage]
 	public class LoginRequest
 	{
 		public string Email { get; set; } = string.Empty;

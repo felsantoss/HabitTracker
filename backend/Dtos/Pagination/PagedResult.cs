@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Dtos.Pagination;
 
+[ExcludeFromCodeCoverage]
 public class PagedResult<T>
 {
     public int PageNumber { get; set; }
