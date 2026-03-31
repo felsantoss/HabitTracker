@@ -1,4 +1,5 @@
 using Configuration.Data;
+using Configuration.ExceptionHandle;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Repositories.CheckInRepository;
@@ -65,7 +66,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("Frontend");
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseAuthentication();
+app.UseMiddleware<AuthenticatedUserContextMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();
