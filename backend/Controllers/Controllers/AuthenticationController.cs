@@ -5,7 +5,7 @@ using Services.Interface;
 namespace Api.Controllers
 {
 	[ApiController]
-	[Route("v1/api/authentication")]
+	[Route("api/v1/authentication")]
 	[Produces("application/json")]
 	public class AuthenticationController
 	{

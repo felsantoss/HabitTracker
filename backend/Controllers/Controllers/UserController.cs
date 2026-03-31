@@ -6,7 +6,7 @@ using Services.Interface;
 namespace Api.Controllers
 {
 	[ApiController]
-	[Route("v1/api/user")]
+	[Route("api/v1/user")]
 	[Produces("application/json")]
 	public class UserController(IUserService userService) : ControllerBase
 	{
