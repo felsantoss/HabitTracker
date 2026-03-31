@@ -30,3 +30,13 @@ A API lê configurações de SQLite e JWT de `backend/Controllers/appsettings.js
 
 ## Fluxo de Aprovação de Alterações
 Antes de qualquer alteração em arquivos deste repositório, apresente de forma objetiva o que será modificado (plano curto e/ou diff proposto) e aguarde aprovação explícita do solicitante. Somente após essa validação as alterações devem ser aplicadas.
+
+## Mensagem de commit
+Mensagem curta e objetiva das alterações sempre em inglês
+
+## Alterações no projeto backend
+Sempre após cada alteração de código, executar:
+
+- `dotnet clean backend/HabitTracker.sln`
+- `dotnet build backend/HabitTracker.sln`
+- `dotnet test backend/Tests/Tests.csproj`

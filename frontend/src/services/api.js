@@ -33,7 +33,7 @@ async function request(path, options = {}) {
 
 // Cria uma nova conta de usuário.
 export function registerUser(payload) {
-  return request('/v1/api/user', {
+  return request('/api/v1/user', {
     method: 'POST',
     body: JSON.stringify(payload),
   })
@@ -41,7 +41,7 @@ export function registerUser(payload) {
 
 // Autentica as credenciais do usuário e retorna dados do JWT.
 export function loginUser(payload) {
-  return request('/v1/api/authentication/login', {
+  return request('/api/v1/authentication/login', {
     method: 'POST',
     body: JSON.stringify(payload),
   })
