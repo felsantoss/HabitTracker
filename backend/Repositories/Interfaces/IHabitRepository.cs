@@ -12,5 +12,9 @@ namespace Repositories.Interfaces
 		Task<Habit> GetHabitByIdAndUserId(int habitId, int userId);
 		
 		Task Add(Habit habit);
+
+		Task Update(Habit habit);
+
+		Task Archive(Habit habit);
 	}
 }

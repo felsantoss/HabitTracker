@@ -12,6 +12,14 @@ public static class HabitValidator
 
         CheckFields(habitCreateRequest);
     }
+
+    public static void UpdateHabitValidator(HabitUpdateRequest habitUpdateRequest)
+    {
+        if (habitUpdateRequest == null)
+            throw new Exception("RequestIsNull");
+
+        CheckFields(habitUpdateRequest);
+    }
     
     private static void CheckFields(HabitCreateRequest habitCreateRequest)
     {
@@ -22,6 +30,20 @@ public static class HabitValidator
             throw new Exception("TitleMustBeBetween3And100Characters");
 
         if (!string.IsNullOrEmpty(habitCreateRequest.Description))
+        {
+            // TODO
+        }
+    }
+
+    private static void CheckFields(HabitUpdateRequest habitUpdateRequest)
+    {
+        if (string.IsNullOrEmpty(habitUpdateRequest.Title))
+            throw new Exception("TitleIsEmpty");
+
+        if (habitUpdateRequest.Title.Length < 3 || habitUpdateRequest.Title.Length > 100)
+            throw new Exception("TitleMustBeBetween3And100Characters");
+
+        if (!string.IsNullOrEmpty(habitUpdateRequest.Description))
         {
             // TODO
         }

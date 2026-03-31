@@ -12,7 +12,7 @@ namespace Repositories.HabitRepository
 		public async Task<PagedResult<Habit>> GetPaginatedAsync(int userId, PaginationQuery pagination)
 		{
 			var query = dataContext.Set<Habit>()
-								   .Where(h => h.UserId == userId)
+								   .Where(h => h.UserId == userId && h.IsEnabled)
 								   .OrderBy(h => h.StartDate);
 			
 			var total = await query.CountAsync();
@@ -35,7 +35,8 @@ namespace Repositories.HabitRepository
 		
 		public async Task<Habit> GetHabitByIdAndUserId(int habitId, int userId)
 		{
-			var query = await dataContext.Set<Habit>().FirstOrDefaultAsync(f => f.Id == habitId && f.UserId == userId) 
+			var query = await dataContext.Set<Habit>()
+				          .FirstOrDefaultAsync(f => f.Id == habitId && f.UserId == userId && f.IsEnabled) 
 			            ?? throw new ValidationException("Habit not found");
 			
 			return query;
@@ -44,6 +45,22 @@ namespace Repositories.HabitRepository
 		public async Task Add(Habit habit)
 		{
 			dataContext.Add(habit);
+
+			await dataContext.SaveChangesAsync();
+		}
+
+		public async Task Update(Habit habit)
+		{
+			dataContext.Update(habit);
+
+			await dataContext.SaveChangesAsync();
+		}
+
+		public async Task Archive(Habit habit)
+		{
+			habit.IsEnabled = false;
+
+			dataContext.Update(habit);
 
 			await dataContext.SaveChangesAsync();
 		}

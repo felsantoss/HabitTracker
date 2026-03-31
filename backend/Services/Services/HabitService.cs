@@ -66,6 +66,33 @@ namespace Services.Services
 			};
 		}
 
+		public async Task<HabitResponse> Update(int userId, int habitId, HabitUpdateRequest request)
+		{
+			HabitValidator.UpdateHabitValidator(request);
+
+			var habit = await habitRepository.GetHabitByIdAndUserId(habitId, userId);
+
+			habit.Title = request.Title;
+			habit.Description = request.Description;
+
+			await habitRepository.Update(habit);
+
+			return new HabitResponse
+			{
+				Id = habit.Id,
+				Title = habit.Title,
+				Description = habit.Description,
+				StartDate = habit.StartDate
+			};
+		}
+
+		public async Task Archive(int userId, int habitId)
+		{
+			var habit = await habitRepository.GetHabitByIdAndUserId(habitId, userId);
+
+			await habitRepository.Archive(habit);
+		}
+
 		public async Task<CheckInResponse> GetCheckIn(int userId, int habitId, PaginationQuery pagination)
 		{
 			if (pagination == null)

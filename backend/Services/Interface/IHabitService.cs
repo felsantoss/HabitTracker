@@ -11,6 +11,10 @@ namespace Services.Interface
 		
 		Task<HabitResponse> Create(HabitCreateRequest habitCreateRequest, int userId);
 
+		Task<HabitResponse> Update(int userId, int habitId, HabitUpdateRequest request);
+
+		Task Archive(int userId, int habitId);
+
 		Task<CheckInResponse> GetCheckIn(int userId, int habitId, PaginationQuery pagination);
 		
 		Task<bool> CreateCheckIn(int userId, int habitId);

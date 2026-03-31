@@ -4,6 +4,7 @@ using Services.Interface;
 using System.Security.Claims;
 using Dtos.Pagination;
 using Microsoft.AspNetCore.Authorization;
+using Dtos.Response.Habit;
 
 namespace Api.Controllers
 {
@@ -29,6 +30,7 @@ namespace Api.Controllers
 		
 		[HttpPost]
 		[Authorize]
+		[ProducesResponseType(typeof(HabitResponse), StatusCodes.Status200OK)]
 		public async Task<IActionResult> Create(HabitCreateRequest habitCreateRequest)
 		{
 			var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -39,6 +41,36 @@ namespace Api.Controllers
 			var response = await habitService.Create(habitCreateRequest, userId);
 
 			return new ObjectResult(response);
+		}
+
+		[HttpPut("{habitId}")]
+		[Authorize]
+		[ProducesResponseType(typeof(HabitResponse), StatusCodes.Status200OK)]
+		public async Task<IActionResult> Update(int habitId, HabitUpdateRequest habitUpdateRequest)
+		{
+			var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+			if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId))
+				return Unauthorized("Não foi possível identificar o usuário.");
+
+			var response = await habitService.Update(userId, habitId, habitUpdateRequest);
+
+			return Ok(response);
+		}
+
+		[HttpDelete("{habitId}")]
+		[Authorize]
+		[ProducesResponseType(StatusCodes.Status204NoContent)]
+		public async Task<IActionResult> Archive(int habitId)
+		{
+			var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+			if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId))
+				return Unauthorized("Não foi possível identificar o usuário.");
+
+			await habitService.Archive(userId, habitId);
+
+			return NoContent();
 		}
 
 
