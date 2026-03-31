@@ -1,7 +1,7 @@
-﻿using Dtos.Request.Habit;
+﻿using Configuration.ExceptionHandle;
+using Dtos.Request.Habit;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interface;
-using System.Security.Claims;
 using Dtos.Pagination;
 using Microsoft.AspNetCore.Authorization;
 using Dtos.Response.Habit;
@@ -13,15 +13,11 @@ namespace Api.Controllers
 	[Produces("application/json")]
 	public class HabitController(IHabitService habitService) : ControllerBase
 	{
-		
 		[HttpGet]
 		[Authorize]
 		public async Task<IActionResult> Get([FromQuery] PaginationQuery request)
 		{
-			var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-			
-			if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId)) 
-				return Unauthorized("Não foi possível identificar o usuário.");
+			var userId = HttpContext.GetAuthenticatedUserId();
 			
 			var response = await habitService.Get(request, userId);
 			
@@ -33,10 +29,7 @@ namespace Api.Controllers
 		[ProducesResponseType(typeof(HabitResponse), StatusCodes.Status200OK)]
 		public async Task<IActionResult> Create(HabitCreateRequest habitCreateRequest)
 		{
-			var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-			if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId)) 
-				return Unauthorized("Não foi possível identificar o usuário.");
+			var userId = HttpContext.GetAuthenticatedUserId();
 
 			var response = await habitService.Create(habitCreateRequest, userId);
 
@@ -48,10 +41,7 @@ namespace Api.Controllers
 		[ProducesResponseType(typeof(HabitResponse), StatusCodes.Status200OK)]
 		public async Task<IActionResult> Update(int habitId, HabitUpdateRequest habitUpdateRequest)
 		{
-			var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-			if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId))
-				return Unauthorized("Não foi possível identificar o usuário.");
+			var userId = HttpContext.GetAuthenticatedUserId();
 
 			var response = await habitService.Update(userId, habitId, habitUpdateRequest);
 
@@ -63,10 +53,7 @@ namespace Api.Controllers
 		[ProducesResponseType(StatusCodes.Status204NoContent)]
 		public async Task<IActionResult> Archive(int habitId)
 		{
-			var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-			if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId))
-				return Unauthorized("Não foi possível identificar o usuário.");
+			var userId = HttpContext.GetAuthenticatedUserId();
 
 			await habitService.Archive(userId, habitId);
 
@@ -78,10 +65,7 @@ namespace Api.Controllers
 		[Authorize]
 		public async Task<IActionResult> GetCheckIn(int habitId, [FromQuery] PaginationQuery pagination)
 		{
-			var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-			if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId))
-				return Unauthorized("Não foi possível identificar o usuário.");
+			var userId = HttpContext.GetAuthenticatedUserId();
 
 			var response = await habitService.GetCheckIn(userId, habitId, pagination);
 
@@ -92,10 +76,7 @@ namespace Api.Controllers
 		[Authorize]
 		public async Task<IActionResult> CheckIn(int habitId)
 		{
-			var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-			
-			if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId)) 
-				return Unauthorized("Não foi possível identificar o usuário.");
+			var userId = HttpContext.GetAuthenticatedUserId();
 
 			var response = await habitService.CreateCheckIn(userId, habitId);
 			
