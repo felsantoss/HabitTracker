@@ -72,6 +72,32 @@ export function createHabit({ token, payload }) {
   })
 }
 
+// Atualiza os campos editáveis de um hábito existente.
+export function updateHabit({ token, habitId, payload }) {
+  const body = {
+    title: payload.title,
+    description: payload.description,
+  }
+
+  return request(`/api/v1/habit/${habitId}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(body),
+  })
+}
+
+// Arquiva um hábito existente sem removê-lo fisicamente do backend.
+export function archiveHabit({ token, habitId }) {
+  return request(`/api/v1/habit/${habitId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}
+
 // Registra o check-in diário para um id de hábito específico.
 export function createCheckIn({ token, habitId }) {
   return request(`/api/v1/habit/${habitId}/checkin`, {

@@ -5,11 +5,13 @@ import HabitCard from './components/HabitCard.jsx'
 import HabitForm from './components/HabitForm.jsx'
 import { clearToken, getToken, saveToken } from './services/auth.js'
 import {
+  archiveHabit,
   createCheckIn,
   createHabit,
   getHabits,
   loginUser,
   registerUser,
+  updateHabit,
 } from './services/api.js'
 
 // Componente raiz: coordena o fluxo de autenticação e o estado do dashboard.
@@ -26,6 +28,7 @@ function App() {
   const [authLoading, setAuthLoading] = useState(false)
   const [habitsLoading, setHabitsLoading] = useState(false)
   const [habitSubmitting, setHabitSubmitting] = useState(false)
+  const [habitActionLoading, setHabitActionLoading] = useState(null)
   const [authError, setAuthError] = useState('')
   const [authMessage, setAuthMessage] = useState('')
   const [dashboardMessage, setDashboardMessage] = useState('')
@@ -140,6 +143,54 @@ function App() {
     }
   }
 
+  // Atualiza um hábito existente e troca apenas o item alterado no estado local.
+  async function handleUpdateHabit(habitId, formData) {
+    setHabitActionLoading(habitId)
+    setDashboardMessage('')
+
+    try {
+      const habit = await updateHabit({ token, habitId, payload: formData })
+      setHabits((current) =>
+        current.map((item) => (item.id === habit.id ? habit : item)),
+      )
+      setDashboardMessage('Habit updated successfully.')
+      return true
+    } catch (error) {
+      setDashboardMessage(error.message)
+      return false
+    } finally {
+      setHabitActionLoading(null)
+    }
+  }
+
+  // Confirma e arquiva um hábito existente, removendo-o da lista atual.
+  async function handleArchiveHabit(habitId) {
+    const shouldArchive = window.confirm(
+      'Are you sure you want to archive this habit?',
+    )
+
+    if (!shouldArchive) {
+      return
+    }
+
+    setHabitActionLoading(habitId)
+    setDashboardMessage('')
+
+    try {
+      await archiveHabit({ token, habitId })
+      setHabits((current) => current.filter((habit) => habit.id !== habitId))
+      setPagination((current) => ({
+        ...current,
+        totalItems: Math.max(current.totalItems - 1, 0),
+      }))
+      setDashboardMessage('Habit archived successfully.')
+    } catch (error) {
+      setDashboardMessage(error.message)
+    } finally {
+      setHabitActionLoading(null)
+    }
+  }
+
   // Realiza o check-in de hoje para um hábito específico.
   async function handleCheckIn(habitId) {
     setDashboardMessage('')
@@ -242,9 +293,12 @@ function App() {
             <div className="habit-list">
               {habits.map((habit) => (
                 <HabitCard
+                  actionLoading={habitActionLoading}
                   habit={habit}
                   key={habit.id}
+                  onArchive={handleArchiveHabit}
                   onCheckIn={handleCheckIn}
+                  onUpdate={handleUpdateHabit}
                 />
               ))}
             </div>
